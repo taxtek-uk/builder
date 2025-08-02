@@ -344,6 +344,22 @@ export function useWallConfig() {
   // Check if custom quote is needed
   const needsCustomQuote = config.width > 6000 || optimizedModules.length > 6;
 
+  // Calculate average module width for display purposes
+  const moduleWidthInfo = useMemo(() => {
+    if (optimizedModules.length === 0) return null;
+
+    const usableWidth = config.width - (SIDE_MARGIN * 2);
+    const averageWidth = Math.round(usableWidth / optimizedModules.length);
+    const snappedWidth = Math.round(averageWidth / 100) * 100; // Snap to nearest 100mm
+
+    return {
+      usableWidth,
+      averageWidth,
+      snappedWidth,
+      totalCalculated: snappedWidth * optimizedModules.length
+    };
+  }, [optimizedModules, config.width]);
+
   return {
     config: { ...config, modules: optimizedModules },
     pricing,
@@ -352,6 +368,7 @@ export function useWallConfig() {
     updateAccessories,
     updateInstallation,
     isValidConfiguration: optimizedModules.length > 0 && optimizedModules.length <= 6,
-    needsCustomQuote
+    needsCustomQuote,
+    moduleWidthInfo
   };
 }
