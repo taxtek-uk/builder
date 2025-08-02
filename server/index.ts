@@ -20,5 +20,10 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Wall configuration routes
+  app.post("/api/wall-configs", saveWallConfig);
+  app.get("/api/wall-configs/:id", getWallConfig);
+  app.get("/api/wall-configs", getAllWallConfigs);
+
   return app;
 }
