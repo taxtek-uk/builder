@@ -17,7 +17,7 @@ import { Sun, Home, Moon, Square, Smartphone, RotateCw } from 'lucide-react';
 export function WallConfigurator() {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [isMobileWizardOpen, setIsMobileWizardOpen] = useState(false);
-  const [environmentMode, setEnvironmentMode] = useState<'studio' | 'livingRoom' | 'night'>('studio');
+  const [environmentMode, setEnvironmentMode] = useState<'studio' | 'livingRoom' | 'night' | 'modern'>('studio');
   const [showDimensions, setShowDimensions] = useState(true);
   const [cameraPreset, setCameraPreset] = useState<'auto' | 'front' | 'isometric' | 'left' | 'top'>('auto');
   const wallConfig = useWallConfig();
