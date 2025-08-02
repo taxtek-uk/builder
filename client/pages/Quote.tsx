@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -133,8 +133,8 @@ const Quote = () => {
                       </select>
                     </div>
 
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       className="w-full bg-[#b89773] hover:bg-[#a27f60] text-white"
                     >
                       Submit Quote Request
