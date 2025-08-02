@@ -5,7 +5,7 @@ import { DirectionalLight, AmbientLight, SpotLight } from 'three';
 interface EnhancedLightingProps {
   wallWidth: number;
   wallHeight: number;
-  lightingMode?: 'studio' | 'livingRoom' | 'night';
+  lightingMode?: 'studio' | 'livingRoom' | 'night' | 'modern';
 }
 
 export function EnhancedLighting({ wallWidth, wallHeight, lightingMode = 'studio' }: EnhancedLightingProps) {
@@ -53,6 +53,13 @@ export function EnhancedLighting({ wallWidth, wallHeight, lightingMode = 'studio
           fill: { intensity: 0.3, color: '#16213e' },
           rim: { intensity: 0.6, color: '#0f4c75' }
         };
+      case 'modern':
+        return {
+          ambient: { intensity: 0.35, color: '#f5f5f5' },
+          key: { intensity: 1.1, color: '#ffffff' },
+          fill: { intensity: 0.7, color: '#e8f4f8' },
+          rim: { intensity: 0.5, color: '#64748b' }
+        };
       case 'studio':
       default:
         return {
@@ -69,9 +76,9 @@ export function EnhancedLighting({ wallWidth, wallHeight, lightingMode = 'studio
   return (
     <>
       {/* Ambient Light - Soft overall illumination */}
-      <ambientLight 
-        intensity={config.ambient.intensity} 
-        color={config.ambient.color} 
+      <ambientLight
+        intensity={config.ambient.intensity}
+        color={config.ambient.color}
       />
 
       {/* Key Light - Primary directional light with shadows */}

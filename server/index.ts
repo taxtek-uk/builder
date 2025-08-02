@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { saveWallConfig, getWallConfig, getAllWallConfigs } from "./routes/wall-configs";
 
 export function createServer() {
   const app = express();
@@ -18,6 +19,11 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Wall configuration routes
+  app.post("/api/wall-configs", saveWallConfig);
+  app.get("/api/wall-configs/:id", getWallConfig);
+  app.get("/api/wall-configs", getAllWallConfigs);
 
   return app;
 }

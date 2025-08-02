@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
 import { WallScene } from './WallScene';
@@ -12,13 +12,12 @@ import { ExportControls } from './ExportControls';
 import { MobileWizard } from './MobileWizard';
 import { useWallConfig } from '../hooks/useWallConfig';
 import { useAccessorySelectionProvider } from '../hooks/useAccessorySelection';
-import { useState as useReactState } from 'react';
-import { Sun, Home, Moon, Square, Smartphone } from 'lucide-react';
+import { Sun, Home, Moon, Square, Smartphone, RotateCw } from 'lucide-react';
 
 export function WallConfigurator() {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [isMobileWizardOpen, setIsMobileWizardOpen] = useState(false);
-  const [environmentMode, setEnvironmentMode] = useState<'studio' | 'livingRoom' | 'night'>('studio');
+  const [environmentMode, setEnvironmentMode] = useState<'studio' | 'livingRoom' | 'night' | 'modern'>('studio');
   const [showDimensions, setShowDimensions] = useState(true);
   const [cameraPreset, setCameraPreset] = useState<'auto' | 'front' | 'isometric' | 'left' | 'top'>('auto');
   const wallConfig = useWallConfig();
@@ -34,6 +33,23 @@ export function WallConfigurator() {
     console.log(`${accessoryId} placed on module ${moduleId}`);
   };
 
+  const cycleScene = () => {
+    const scenes: Array<'studio' | 'livingRoom' | 'night' | 'modern'> = ['studio', 'livingRoom', 'night', 'modern'];
+    const currentIndex = scenes.indexOf(environmentMode);
+    const nextIndex = (currentIndex + 1) % scenes.length;
+    setEnvironmentMode(scenes[nextIndex]);
+  };
+
+  const getSceneName = () => {
+    switch (environmentMode) {
+      case 'studio': return 'Studio';
+      case 'livingRoom': return 'Living Room';
+      case 'night': return 'Night Mode';
+      case 'modern': return 'Modern';
+      default: return 'Studio';
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gradient-to-br from-slate-900 to-slate-800">
       {/* 3D Preview Area */}
@@ -47,6 +63,8 @@ export function WallConfigurator() {
                 ? 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)'
                 : environmentMode === 'livingRoom'
                 ? 'linear-gradient(135deg, #fef3e2 0%, #fde8d0 100%)'
+                : environmentMode === 'modern'
+                ? 'linear-gradient(135deg, #1f2937 0%, #374151 100%)'
                 : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'
             }}
             dpr={[1, 2]}
@@ -95,21 +113,33 @@ export function WallConfigurator() {
               showDimensions={showDimensions}
             />
           </Canvas>
-          
-          {/* Premium Control Panel */}
-          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
+
+          {/* Control Buttons */}
+          <div className="absolute top-4 left-4 z-40 flex flex-col space-y-2">
+            {/* Dimensions Toggle Button */}
             <button
               onClick={() => setShowDimensions(!showDimensions)}
-              className={`flex items-center space-x-2 px-3 py-2 rounded text-xs transition-colors ${
+              className={`w-10 h-10 rounded-full transition-colors ${
                 showDimensions
-                  ? 'bg-gold-500 text-white'
-                  : 'bg-white hover:bg-gold-50 text-slate-700 hover:text-gold-700'
-              }`}
+                  ? 'bg-gold-600 hover:bg-gold-700'
+                  : 'bg-black hover:bg-gray-800'
+              } flex items-center justify-center shadow-lg`}
+              title="Start the Preview"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
-              <span>Dimensions</span>
+            </button>
+
+            {/* Scene Switcher Button */}
+            <button
+              onClick={cycleScene}
+              className="w-10 h-10 rounded-full bg-white hover:bg-gray-50 text-gray-700 flex items-center justify-center shadow-lg transition-colors border border-gray-200"
+              title={`Switch Scene (Current: ${getSceneName()})`}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+              </svg>
             </button>
           </div>
 
@@ -152,31 +182,7 @@ export function WallConfigurator() {
       {/* Layout Information Panel */}
       <LayoutInfoPanel config={wallConfig} />
 
-      {/* Camera Controls UI */}
-      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
-        <div className="text-xs font-medium text-slate-700 mb-2 px-1">Camera Views</div>
-        <div className="flex flex-col space-y-1">
-          {[
-            { id: 'auto', label: 'Auto', icon: 'rotate-ccw' },
-            { id: 'front', label: 'Front', icon: 'eye' },
-            { id: 'isometric', label: 'ISO', icon: 'square' },
-            { id: 'left', label: 'Left', icon: 'camera' },
-            { id: 'top', label: 'Top', icon: 'maximize-2' }
-          ].map(({ id, label }) => (
-            <button
-              key={id}
-              onClick={() => setCameraPreset(id as any)}
-              className={`flex items-center space-x-2 px-3 py-2 rounded text-xs transition-colors ${
-                cameraPreset === id
-                  ? 'bg-gold-500 text-white'
-                  : 'bg-white hover:bg-gold-50 text-slate-700 hover:text-gold-700'
-              }`}
-            >
-              <span>{label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+
 
       {/* Environment Controls UI */}
       <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
