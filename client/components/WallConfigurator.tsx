@@ -182,31 +182,7 @@ export function WallConfigurator() {
       {/* Layout Information Panel */}
       <LayoutInfoPanel config={wallConfig} />
 
-      {/* Camera Controls UI */}
-      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
-        <div className="text-xs font-medium text-slate-700 mb-2 px-1">Camera Views</div>
-        <div className="flex flex-col space-y-1">
-          {[
-            { id: 'auto', label: 'Auto', icon: 'rotate-ccw' },
-            { id: 'front', label: 'Front', icon: 'eye' },
-            { id: 'isometric', label: 'ISO', icon: 'square' },
-            { id: 'left', label: 'Left', icon: 'camera' },
-            { id: 'top', label: 'Top', icon: 'maximize-2' }
-          ].map(({ id, label }) => (
-            <button
-              key={id}
-              onClick={() => setCameraPreset(id as any)}
-              className={`flex items-center space-x-2 px-3 py-2 rounded text-xs transition-colors ${
-                cameraPreset === id
-                  ? 'bg-gold-500 text-white'
-                  : 'bg-white hover:bg-gold-50 text-slate-700 hover:text-gold-700'
-              }`}
-            >
-              <span>{label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+
 
       {/* Environment Controls UI */}
       <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
