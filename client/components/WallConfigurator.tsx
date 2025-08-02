@@ -13,7 +13,7 @@ import { MobileWizard } from './MobileWizard';
 import { useWallConfig } from '../hooks/useWallConfig';
 import { useAccessorySelectionProvider } from '../hooks/useAccessorySelection';
 import { useState as useReactState } from 'react';
-import { Sun, Home, Moon, Square, Smartphone } from 'lucide-react';
+import { Sun, Home, Moon, Square, Smartphone, RotateCw } from 'lucide-react';
 
 export function WallConfigurator() {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
@@ -95,7 +95,7 @@ export function WallConfigurator() {
               showDimensions={showDimensions}
             />
           </Canvas>
-          
+
           {/* Premium Control Panel */}
           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
             <button
