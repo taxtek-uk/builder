@@ -63,6 +63,8 @@ export function WallConfigurator() {
                 ? 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)'
                 : environmentMode === 'livingRoom'
                 ? 'linear-gradient(135deg, #fef3e2 0%, #fde8d0 100%)'
+                : environmentMode === 'modern'
+                ? 'linear-gradient(135deg, #1f2937 0%, #374151 100%)'
                 : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'
             }}
             dpr={[1, 2]}
