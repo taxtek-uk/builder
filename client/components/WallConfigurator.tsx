@@ -33,6 +33,23 @@ export function WallConfigurator() {
     console.log(`${accessoryId} placed on module ${moduleId}`);
   };
 
+  const cycleScene = () => {
+    const scenes: Array<'studio' | 'livingRoom' | 'night' | 'modern'> = ['studio', 'livingRoom', 'night', 'modern'];
+    const currentIndex = scenes.indexOf(environmentMode);
+    const nextIndex = (currentIndex + 1) % scenes.length;
+    setEnvironmentMode(scenes[nextIndex]);
+  };
+
+  const getSceneName = () => {
+    switch (environmentMode) {
+      case 'studio': return 'Studio';
+      case 'livingRoom': return 'Living Room';
+      case 'night': return 'Night Mode';
+      case 'modern': return 'Modern';
+      default: return 'Studio';
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gradient-to-br from-slate-900 to-slate-800">
       {/* 3D Preview Area */}
