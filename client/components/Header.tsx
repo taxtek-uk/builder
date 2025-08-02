@@ -5,11 +5,8 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-neutral-200">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-[#b89773] rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">TWS</span>
-          </div>
-          <span className="text-xl font-bold text-neutral-800">The Wall Shop</span>
+        <Link to="/" className="text-xl text-neutral-800 pl-2">
+          The Wall Shop
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
