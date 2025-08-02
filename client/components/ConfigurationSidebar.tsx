@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { X, Ruler, Palette, Settings, ShoppingCart, ChevronDown, ChevronRight } from 'lucide-react';
+import { X, Ruler, Palette, Settings, ShoppingCart, ChevronDown, ChevronRight, MessageSquareMore } from 'lucide-react';
 import { WallConfig } from '../hooks/useWallConfig';
 import { DimensionsPanel } from './panels/DimensionsPanel';
 import { FinishPanel } from './panels/FinishPanel';
 import { AccessoriesPanel } from './panels/AccessoriesPanel';
 import { SummaryPanel } from './panels/SummaryPanel';
+import { CustomQuoteModal } from './CustomQuoteModal';
 
 interface ConfigurationSidebarProps {
   config: any;
@@ -16,6 +17,7 @@ type PanelType = 'dimensions' | 'finish' | 'accessories' | 'summary';
 
 export function ConfigurationSidebar({ config, isOpen, onClose }: ConfigurationSidebarProps) {
   const [activePanel, setActivePanel] = useState<PanelType | null>(null);
+  const [showCustomQuoteModal, setShowCustomQuoteModal] = useState(false);
 
   const panels = [
     {
@@ -126,9 +128,28 @@ export function ConfigurationSidebar({ config, isOpen, onClose }: ConfigurationS
             <div className="text-xs text-slate-500 mt-1">
               {config.pricing?.area.toFixed(2)}m² • {config.config?.modules.length} modules
             </div>
+
+            {/* Custom Quote Button */}
+            {config.needsCustomQuote && (
+              <button
+                onClick={() => setShowCustomQuoteModal(true)}
+                className="w-full mt-3 flex items-center justify-center space-x-2 bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+              >
+                <MessageSquareMore size={16} />
+                <span>Get Custom Quote</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Custom Quote Modal */}
+      <CustomQuoteModal
+        isOpen={showCustomQuoteModal}
+        onClose={() => setShowCustomQuoteModal(false)}
+        wallWidth={config.config?.width || 0}
+        moduleCount={config.config?.modules.length || 0}
+      />
     </>
   );
 }

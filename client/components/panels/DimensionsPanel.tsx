@@ -10,9 +10,12 @@ export function DimensionsPanel({ config }: DimensionsPanelProps) {
   const [height, setHeight] = useState(config.config.height);
 
   const handleWidthChange = (value: number) => {
-    const clampedValue = Math.max(1000, Math.min(6000, value));
+    const clampedValue = Math.max(1000, value); // Don't clamp at 6000 to allow warning
     setWidth(clampedValue);
-    config.updateDimensions(clampedValue, config.config.height);
+    // Only update if within limits or warn user
+    if (clampedValue <= 6000) {
+      config.updateDimensions(clampedValue, config.config.height);
+    }
   };
 
   const handleHeightChange = (value: number) => {
@@ -36,15 +39,26 @@ export function DimensionsPanel({ config }: DimensionsPanelProps) {
             value={width}
             onChange={(e) => handleWidthChange(parseInt(e.target.value) || 1000)}
             min={1000}
-            max={6000}
             step={100}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent ${
+              width > 6000 ? 'border-amber-300 bg-amber-50' : 'border-slate-300'
+            }`}
           />
           <span className="absolute right-3 top-2 text-sm text-slate-500">mm</span>
         </div>
         <div className="text-xs text-slate-500 mt-1">
           Range: 1,000mm - 6,000mm
         </div>
+        {width > 6000 && (
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-2 mt-2">
+            <div className="flex items-start space-x-2">
+              <AlertTriangle size={14} className="text-amber-600 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-amber-700">
+                Our standard system supports up to 6.0 metres. For larger walls, please request a custom quotation.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Height Input */}
@@ -73,10 +87,37 @@ export function DimensionsPanel({ config }: DimensionsPanelProps) {
       <div className="bg-slate-50 rounded-lg p-3">
         <h4 className="text-sm font-medium text-slate-900 mb-2">Module Configuration</h4>
         <div className="space-y-1 text-sm text-slate-600">
-          <div>Modules required: {config.config.modules.length}</div>
+          <div className="flex justify-between">
+            <span>Modules required:</span>
+            <span className={config.config.modules.length > 6 ? 'text-amber-600 font-medium' : ''}>
+              {config.config.modules.length}
+              {config.config.modules.length > 6 && ' (exceeds limit)'}
+            </span>
+          </div>
           <div>Usable width: {width - 50}mm (accounting for 25mm cable margins)</div>
           <div>Area: {config.pricing.area.toFixed(2)}m²</div>
+          {config.config.modules.length > 0 && width <= 6000 && (
+            <div className="pt-2 border-t border-slate-200 mt-2">
+              <div className="text-xs text-slate-500 mb-1">Module widths (auto-calculated):</div>
+              {config.config.modules.map((module: any, idx: number) => (
+                <div key={module.id} className="flex justify-between text-xs">
+                  <span>Module {idx + 1}:</span>
+                  <span className="font-mono">{module.width}mm</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+        {config.config.modules.length > 6 && (
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-2 mt-2">
+            <div className="flex items-start space-x-2">
+              <AlertTriangle size={14} className="text-amber-600 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-amber-700">
+                Maximum of 6 modules supported in standard configurations.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Custom Quote Warning */}

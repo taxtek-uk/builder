@@ -49,34 +49,49 @@ export function SummaryPanel({ config }: SummaryPanelProps) {
         </div>
       </div>
 
-      {/* Price Breakdown */}
+      {/* Live Pricing Display */}
       <div className="border border-slate-200 rounded-lg p-4">
-        <h4 className="font-medium text-slate-900 mb-3">Price Breakdown</h4>
-        
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="font-medium text-slate-900">Live Pricing</h4>
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        </div>
+
         <div className="space-y-2 text-sm">
+          {/* Base Price Calculation */}
+          <div className="bg-slate-50 rounded-lg p-3 mb-3">
+            <div className="text-xs text-slate-500 mb-1">Base Price Calculation:</div>
+            <div className="flex justify-between items-center">
+              <span className="text-slate-600">Area: {config.pricing.area.toFixed(2)}m² × £595/m²</span>
+              <span className="font-medium text-slate-900">£{config.pricing.base.toLocaleString('en-GB', { maximumFractionDigits: 0 })}</span>
+            </div>
+          </div>
+
           <div className="flex justify-between">
-            <span className="text-slate-600">Base Wall ({config.pricing.area.toFixed(2)}m² @ £595/m²):</span>
+            <span className="text-slate-600">Base Price:</span>
             <span className="font-medium">£{config.pricing.base.toLocaleString('en-GB', { maximumFractionDigits: 0 })}</span>
           </div>
-          
+
           {config.pricing.accessories > 0 && (
             <div className="flex justify-between">
-              <span className="text-slate-600">Accessories:</span>
+              <span className="text-slate-600">Add-ons & Accessories:</span>
               <span className="font-medium">£{config.pricing.accessories.toLocaleString('en-GB')}</span>
             </div>
           )}
-          
+
           {config.pricing.installation > 0 && (
             <div className="flex justify-between">
               <span className="text-slate-600">Professional Installation:</span>
               <span className="font-medium">£{config.pricing.installation.toLocaleString('en-GB')}</span>
             </div>
           )}
-          
-          <div className="border-t border-slate-200 pt-2 mt-2">
-            <div className="flex justify-between text-lg font-bold">
-              <span>Total:</span>
-              <span className="text-gold-600">£{config.pricing.total.toLocaleString('en-GB', { maximumFractionDigits: 0 })}</span>
+
+          <div className="border-t border-slate-200 pt-3 mt-3">
+            <div className="flex justify-between items-center">
+              <span className="text-lg font-bold text-slate-900">Total Price (Live):</span>
+              <span className="text-xl font-bold text-gold-600">£{config.pricing.total.toLocaleString('en-GB', { maximumFractionDigits: 0 })}</span>
+            </div>
+            <div className="text-xs text-slate-500 mt-1 text-right">
+              Updates automatically as you configure
             </div>
           </div>
         </div>
@@ -122,12 +137,30 @@ export function SummaryPanel({ config }: SummaryPanelProps) {
         {/* Primary Checkout Button */}
         <button
           onClick={handleCheckout}
-          disabled={!config.isValidConfiguration}
+          disabled={!config.isValidConfiguration || config.needsCustomQuote}
           className="w-full flex items-center justify-center space-x-2 bg-gold-500 hover:bg-gold-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors"
         >
           <CreditCard size={16} />
-          <span>Confirm & Reserve My Wall</span>
+          <span>
+            {config.needsCustomQuote
+              ? 'Custom Quote Required'
+              : 'Confirm & Reserve My Wall'
+            }
+          </span>
         </button>
+
+        {/* Configuration Status */}
+        {!config.isValidConfiguration && !config.needsCustomQuote && (
+          <div className="text-center text-xs text-amber-600 mt-2">
+            Please adjust your configuration to continue
+          </div>
+        )}
+
+        {config.needsCustomQuote && (
+          <div className="text-center text-xs text-slate-600 mt-2">
+            Configuration exceeds standard limits - custom quote needed
+          </div>
+        )}
 
         {/* Payment Options */}
         <div className="text-center">
