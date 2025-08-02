@@ -114,8 +114,9 @@ export function WallConfigurator() {
             />
           </Canvas>
 
-          {/* Dimensions Toggle Button */}
-          <div className="absolute top-4 left-4 z-40">
+          {/* Control Buttons */}
+          <div className="absolute top-4 left-4 z-40 flex flex-col space-y-2">
+            {/* Dimensions Toggle Button */}
             <button
               onClick={() => setShowDimensions(!showDimensions)}
               className={`w-10 h-10 rounded-full transition-colors ${
@@ -127,6 +128,17 @@ export function WallConfigurator() {
             >
               <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+            </button>
+
+            {/* Scene Switcher Button */}
+            <button
+              onClick={cycleScene}
+              className="w-10 h-10 rounded-full bg-white hover:bg-gray-50 text-gray-700 flex items-center justify-center shadow-lg transition-colors border border-gray-200"
+              title={`Switch Scene (Current: ${getSceneName()})`}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
               </svg>
             </button>
           </div>
