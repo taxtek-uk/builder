@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
 import { WallScene } from './WallScene';
@@ -12,7 +12,6 @@ import { ExportControls } from './ExportControls';
 import { MobileWizard } from './MobileWizard';
 import { useWallConfig } from '../hooks/useWallConfig';
 import { useAccessorySelectionProvider } from '../hooks/useAccessorySelection';
-import { useState as useReactState } from 'react';
 import { Sun, Home, Moon, Square, Smartphone, RotateCw } from 'lucide-react';
 
 export function WallConfigurator() {
