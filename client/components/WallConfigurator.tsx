@@ -96,20 +96,18 @@ export function WallConfigurator() {
             />
           </Canvas>
 
-          {/* Premium Control Panel */}
-          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2 z-40">
+          {/* Dimensions Toggle Button */}
+          <div className="absolute top-4 left-4 z-40">
             <button
               onClick={() => setShowDimensions(!showDimensions)}
-              className={`flex items-center space-x-2 px-3 py-2 rounded text-xs transition-colors ${
+              className={`w-10 h-10 rounded-full transition-colors ${
                 showDimensions
-                  ? 'bg-gold-500 text-white'
-                  : 'bg-white hover:bg-gold-50 text-slate-700 hover:text-gold-700'
-              }`}
+                  ? 'bg-gold-600 hover:bg-gold-700'
+                  : 'bg-black hover:bg-gray-800'
+              } flex items-center justify-center shadow-lg`}
+              title="Toggle Dimensions"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-              <span>Dimensions</span>
+              <RotateCw className="w-5 h-5 text-white" />
             </button>
           </div>
 
