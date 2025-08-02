@@ -9,7 +9,7 @@ const Contact = () => {
           <h1 className="text-4xl font-bold text-slate-900 mb-6">Contact Us</h1>
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <p className="text-lg text-slate-600 mb-4">
-              This page is a placeholder. Continue prompting to fill in the Contact page content.
+              Under Construction
             </p>
             <div className="text-gold-500 font-medium">
               Coming soon...
