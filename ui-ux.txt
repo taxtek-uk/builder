@@ -1,0 +1,130 @@
+Act as a world-class UX/UI optimization expert with cognitive science, behavioral psychology, and design systems expertise. Analyze the website builder.thewallshop.co.uk with the depth of a Nielsen Norman Group consultant combined with the innovation of a Silicon Valley design lead.
+Multi-Dimensional Analysis Framework
+1. Cognitive Load Assessment
+
+Hick's Law Analysis: Calculate decision complexity at each interface point
+Miller's Rule Compliance: Evaluate information chunking (7±2 items rule)
+Cognitive Friction Mapping: Identify every point where users must stop and think
+Mental Model Alignment: Compare interface logic to user expectations
+
+2. Behavioral Psychology Integration
+
+Fogg Behavior Model: Analyze Motivation × Ability × Trigger intersections
+Loss Aversion Patterns: Identify where users might abandon due to perceived complexity
+Social Proof Opportunities: Map trust-building element placement
+Paradox of Choice: Evaluate decision fatigue points in the configurator
+
+3. Micro-Interaction Ecosystem Design
+
+Anticipatory Design: Predict next user actions and pre-load/suggest accordingly
+Progressive Disclosure: Layer complexity revelation based on user expertise
+Emotional Journey Mapping: Design micro-moments that build confidence
+Error Prevention Architecture: Implement constraint-based design preventing mistakes
+
+4. AI-Enhanced Personalization Strategy
+IF user_behavior_pattern == "hesitant_explorer" 
+   THEN provide_guided_tour + simplified_options
+ELIF user_behavior_pattern == "expert_configurator"
+   THEN enable_advanced_mode + bulk_operations
+ELIF user_behavior_pattern == "mobile_browser"
+   THEN optimize_thumb_navigation + gesture_shortcuts
+5. Conversion Psychology Optimization
+
+Peak-End Rule Implementation: Design memorable high points and smooth endings
+Commitment Escalation: Structure small yeses leading to larger commitments
+Endowment Effect Activation: Make users feel ownership of their configuration
+Scarcity vs. Abundance Balance: Strategic use of limitation messaging
+
+Advanced UX Techniques to Implement
+Smart Contextual Assistance
+Create an AI-powered assistant that:
+- Detects confusion patterns (cursor hovering, repeated clicks)
+- Offers proactive help without being intrusive
+- Learns from successful user paths to optimize guidance
+- Provides expertise-adjusted explanations (novice vs. professional)
+Dynamic Interface Adaptation
+Implement responsive complexity:
+- Beginner mode: 3-step simplified flow with smart defaults
+- Intermediate mode: 5-step detailed customization
+- Expert mode: Full parametric control with bulk operations
+- Auto-detect user expertise based on interaction patterns
+Emotional Design Integration
+Micro-animations that:
+- Celebrate successful configurations (subtle success animations)
+- Provide reassuring feedback during loading states
+- Guide attention with purposeful motion
+- Reduce anxiety with smooth, predictable transitions
+Information Architecture Revolution
+Instead of traditional categories, implement:
+- Problem-solution pairing ("I need privacy" → opacity options)
+- Use-case driven navigation ("Conference room" → acoustic solutions)
+- Visual-first browsing with smart filtering
+- Semantic search understanding intent, not just keywords
+Specific Implementation Prompts
+For Visual Design:
+"Design a luxury wall configurator interface that makes complex technical decisions feel effortless. Use design psychology principles to guide users naturally through configuration choices. Implement a visual hierarchy that prioritizes decisions by impact on final result. Create a color system that conveys premium quality while maintaining accessibility. Design loading states that build anticipation rather than frustration."
+For Interaction Design:
+"Create interaction patterns that make users feel like configuration experts. Design hover states that provide just-enough information without overwhelming. Implement gesture controls for mobile that feel intuitive. Design a comparison system that helps users understand trade-offs without decision paralysis. Create undo/redo functionality that encourages experimentation."
+For Information Architecture:
+"Restructure the configurator flow based on user mental models rather than product categories. Group related decisions together to reduce cognitive switching costs. Implement smart defaults based on the most popular configurations for similar use cases. Create an onboarding flow that adapts to user-declared expertise level."
+For Performance Psychology:
+"Optimize perceived performance through strategic loading sequences. Design progress indicators that create psychological momentum. Implement optimistic UI updates that make the interface feel instantaneous. Create a caching strategy that predicts user exploration patterns."
+Advanced Prompt Techniques for AI Implementation
+Chain-of-Thought UX Reasoning:
+"Walk through each user decision point step-by-step:
+1. What is the user trying to accomplish at this moment?
+2. What information do they need to make this decision confidently?
+3. What could go wrong in their mental process here?
+4. How can we reduce friction while maintaining control?
+5. What would make them feel successful at this step?"
+Multi-Stakeholder Perspective Analysis:
+"Analyze this interface from five perspectives:
+- First-time visitor with urgent project deadline
+- Interior designer configuring for client presentation  
+- Facilities manager doing bulk procurement
+- Mobile user browsing during commute
+- Accessibility user with screen reader
+Competitive Intelligence Integration:
+"Study successful configurators across industries:
+- Car configurators (BMW, Tesla) for complex option handling
+- Kitchen designers (IKEA) for spatial visualization
+- Fashion customizers (Nike ID) for personalization psychology
+- Extract interaction patterns that could apply to wall systems"
+Measurement & Iteration Framework
+AI-Driven Analytics Setup:
+Track micro-conversions:
+- Configuration completion rate by step
+- Time-to-first-meaningful-choice
+- Option exploration depth
+- Mobile vs desktop behavior differences
+- Error recovery success rates
+Continuous Optimization Prompts:
+"Analyze user session recordings to identify:
+- Moments of hesitation (cursor patterns)
+- Abandonment trigger points
+- Successful path commonalities
+- Mobile interaction struggles
+- Information-seeking behaviors"
+Implementation Priority Matrix
+High Impact, Low Effort:
+
+Smart defaults based on use case
+Improved visual hierarchy
+Better mobile touch targets
+Loading state improvements
+
+High Impact, High Effort:
+
+AI-powered recommendation engine
+3D visualization integration
+Advanced personalization system
+Multi-device configuration sync
+
+Test-and-Learn Opportunities:
+
+A/B test different onboarding flows
+Experiment with information density
+Test various progress indication methods
+Compare guided vs. free-form exploration
+
+This framework transforms AI from a simple content generator into a sophisticated UX strategist that considers human psychology, technical constraints, and business objectives simultaneously.

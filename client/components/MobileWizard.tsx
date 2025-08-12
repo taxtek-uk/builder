@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Check, Home, Ruler, Settings, Gamepad2, Wrench, CreditCard } from 'lucide-react';
+import { LucideProps, ChevronLeft, ChevronRight, Check, Home, Ruler, Settings, Gamepad2, Wrench, CreditCard } from 'lucide-react';
 import { WallConfig } from '../hooks/useWallConfig';
 
 interface MobileWizardProps {
@@ -13,7 +13,7 @@ type WizardStep = 'covering' | 'dimensions' | 'accessories' | 'devices' | 'insta
 interface StepConfig {
   id: WizardStep;
   title: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<LucideProps>;
   description: string;
 }
 

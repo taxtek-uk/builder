@@ -121,13 +121,39 @@ export class MaterialLibrary {
     }
 
     const config = this.materials[type] || this.materials.mattePaint;
-    const material = new MeshStandardMaterial();
+
+    // Use Physical material for glossy, metal, mirror and cloth (for sheen)
+    const usePhysical = ['glossPaint', 'brushedSteel', 'blackSteel', 'brass', 'mirror', 'linen'].includes(type);
+    const material: MeshStandardMaterial = usePhysical
+      ? new MeshPhysicalMaterial()
+      : new MeshStandardMaterial();
 
     // Set base properties
     material.color = new Color(color || config.baseColor);
     material.roughness = config.roughness;
     material.metalness = config.metalness;
     material.envMapIntensity = config.envMapIntensity || 0.3;
+
+    // Additional tuning for physical materials
+    if (material instanceof MeshPhysicalMaterial) {
+      if (type === 'glossPaint') {
+        material.clearcoat = 0.7;
+        material.clearcoatRoughness = 0.12;
+      }
+      if (type === 'mirror') {
+        material.roughness = 0.02;
+        material.metalness = 1.0;
+        material.reflectivity = 1.0 as any; // backward compatibility
+        material.envMapIntensity = 1.2;
+      }
+      if (type === 'linen') {
+        // Cloth-like sheen
+        // @ts-ignore - sheen is available on MeshPhysicalMaterial in three >= r155
+        material.sheen = 0.5;
+        // @ts-ignore
+        material.sheenRoughness = 0.7;
+      }
+    }
 
     // Load texture if provided
     if (textureUrl) {
@@ -162,7 +188,8 @@ export class MaterialLibrary {
       default:
         // Determine if it should be matte or gloss based on color
         const isGlossy = this.isGlossyColor(color);
-        return this.createMaterial(isGlossy ? 'glossPaint' : 'mattePaint', color, texture);
+        const type = isGlossy ? 'glossPaint' : 'mattePaint';
+        return this.createMaterial(type, color, texture);
     }
   }
 

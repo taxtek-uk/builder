@@ -83,7 +83,6 @@ export function DimensionLabels({ modules, wallWidth, wallHeight, showDimensions
           color="#2d3748"
           anchorX="center"
           anchorY="middle"
-          font="/fonts/Inter-Medium.woff"
         >
           {module.width}mm
         </Text>
@@ -142,7 +141,6 @@ export function DimensionLabels({ modules, wallWidth, wallHeight, showDimensions
         color="#1f2937"
         anchorX="center"
         anchorY="middle"
-        font="/fonts/Inter-Bold.woff"
       >
         {wallWidth}mm TOTAL WIDTH
       </Text>
@@ -162,7 +160,6 @@ export function DimensionLabels({ modules, wallWidth, wallHeight, showDimensions
         anchorX="center"
         anchorY="middle"
         rotation={[0, 0, Math.PI / 2]}
-        font="/fonts/Inter-Medium.woff"
       >
         {wallHeight}mm
       </Text>

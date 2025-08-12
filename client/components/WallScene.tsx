@@ -1,6 +1,6 @@
 import { useRef, useState, useMemo } from 'react';
 import { useFrame, useThree, useLoader } from '@react-three/fiber';
-import { Text, Box, Plane, Html } from '@react-three/drei';
+import { Text, Box, Plane, Html, RoundedBox, Edges } from '@react-three/drei';
 import { Group, Mesh, TextureLoader, RepeatWrapping } from 'three';
 import { WallConfig } from '../hooks/useWallConfig';
 import { AccessorySnapping } from '../utils/accessorySnapping';
@@ -200,9 +200,11 @@ function WallModule({
   return (
     <group position={[xPos, yPos, zPos]}>
       {/* Main module */}
-      <Box
+      <RoundedBox
         ref={moduleRef}
-        args={[toMeters(module.width), toMeters(module.height), 0.18]} // 180mm depth
+        args={[toMeters(module.width), toMeters(module.height), 0.18]}
+        radius={0.02}
+        smoothness={8}
         castShadow
         receiveShadow
         onPointerOver={() => {
@@ -248,7 +250,9 @@ function WallModule({
 
           return <primitive object={material} attach="material" />;
         })()}
-      </Box>
+        {/* Subtle outline for readability */}
+        <Edges color="#111827" thresholdAngle={15} />
+      </RoundedBox>
 
       {/* Special Module Border Indicator */}
       {['tv', 'fire', 'gaming'].includes(module.type) && (
